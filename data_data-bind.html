@@ -14,7 +14,7 @@
         {{ person.name }} {{ person.age }} <BR>
         {{ nextYear('안녕하세요') }}
         <input v-bind:type="text" v-bind:value="inputData">
-        <input :type="text" :value="inputData"> <!-- bind 생각하고 콜론만 넣어도 됨 -->
+        <input :type="type" :value="inputData"> <!-- bind 생각하고 콜론만 넣어도 됨 -->
         <a :href="link">유튜브 채널</a>
         <a :href="getLink()">유튜브 채널</a>
     </div>
