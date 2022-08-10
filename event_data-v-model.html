@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 이벤트 -->
+    <div id="app">
+        <!-- onClick 이벤트 -->
+        <h3>onClick 이벤트 </h3>
+        {{ year }}
+        <button v-on:Click="plus">더하기</button>
+        <button v-on:Click="minus">빼기</button>        
+
+        <!-- submit 이벤트, 이벤트 핸들링 -->
+        <h3>submit 이벤트, 이벤트 핸들링</h3>
+        <form v-on:submit.prevent="submit">
+            <input type="text"><br>
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- 데이터 양방향 바인딩 -->
+        <h3>데이터 양방향 바인딩</h3>
+        <form >
+            <!-- <input type="text" :value="text" @keyup="updateText"><br>  -->
+            <!-- v-on은 @로 가능 -->
+
+            <!-- 양방향 바인딩 : v-model -->
+            <input type="text" v-model="text"><br>
+            {{ text }}
+            <button type="submit">Submit</button>
+        </form>        
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                year: 2022,
+                text: 'text'
+            },
+            methods: {
+                plus() {
+                    this.year++;
+                },
+                minus() {
+                    this.year--;
+                },
+                submit() {
+                    alert('submit')
+                    console.log('hello')
+                },
+                //updateText(e) {
+                //    this.text = e.target.value;
+                //}
+            }
+        })
+    </script>    
+</body>
+</html>
