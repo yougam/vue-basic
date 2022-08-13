@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- Computed 속성 --> <!-- methods와 차이는 computed는 캐싱을 한다. -->
+    <div id="app">
+        <!-- Computed 속성 -->
+        <button @click="changeMessage">Click</button>
+        {{ reversedMessage }}
+        {{ reversedMessage }}
+        <!-- Watch 속성  -->
+        <button @click="changeMessage">Click</button>
+        {{ updated }}
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: '헬로우',
+                updated: '아니요'  
+            },
+            methods: {
+                changeMessage() {
+                    this.message = '나는코더';
+                }
+            },
+            computed: { //methods와 차이는 computed는 캐싱을 한다.
+                reversedMessage() {
+                    return this.message.split('').reverse().join('');
+                }
+            },
+            watch: { //data의 감시가 필요한 경우 사용하지만 대부분의 경우 computed 속성이 더 적합
+                message(newVal, oldVal) {
+                    console.log(newVal, oldVal);
+                    this.updated = '네';
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
