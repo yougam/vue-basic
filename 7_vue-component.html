@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기</title>
+    <style>
+        .red {
+            color: red;
+        }
+        .font-bold {
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 전역 components, 지역 components -->
+    <div id="app">
+        <my-button></my-button>
+        <local-button></local-button>
+    </div>
+    <div id="app1">
+        <my-button></my-button>
+        <local-button></local-button>
+    </div>
+    
+    <script>
+        <!-- component안에 component사용하기 -->
+        Vue.component('hello-world', {
+            template: `<div>hello world</div>`
+        });
+        <!-- 전역 등록 component -->
+        Vue.component('my-button', {
+            template: `
+                <div>
+                    <div>--- 전역 component  --- </div>
+                    {{ name }}    
+                    <hello-world></hello-world>
+                    <button @click="changeText">Click</button>
+                    <div>--- 전역 component --- </div>
+                </div>
+            `,
+            data() {
+                return {
+                    name: 'nan coder'
+                }
+            },
+            methods: {
+                changeText() {
+                    this.name = 'naa coder update';
+                }
+            }
+        })
+
+        <!-- 지역 component -->
+        const localButton = {
+            template: `
+            <div>
+                <div>=== 지역 component === </div>
+                {{ name }}    
+                <hello-world></hello-world>
+                <button @click="changeText">Click</button><br>
+                <div>=== 지역 component === </div>
+            </div>
+            `,
+            data() {
+                return {
+                    name: 'nan coder'
+                }
+            },
+            methods: {
+                changeText() {
+                    this.name = 'naa coder update';
+                }
+            }            
+        }
+        const app = new Vue({
+            el: '#app',
+            components: {
+                'local-button' : localButton
+            },
+            data: {
+                name: 'app'
+            },
+            methods: {
+                changeText() {
+                    app1.name = 'app1 변경'
+                }
+            }
+        })
+        
+        const app1 = new Vue({
+            el: '#app1',
+            components: {
+                'local-button' : localButton
+            },            
+            data: {
+                name: 'app1'
+            },
+            methods: {
+                changeText() {
+                    app.name = 'app 변경'
+                }
+            }
+        })        
+    </script>
+
+</body>
+</html>

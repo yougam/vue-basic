@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기</title>
+    <style>
+        .red {
+            color: red;
+        }
+        .font-bold {
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- v-if v-for 사용하기 -->
+    <div id="app">
+        <!-- v-if -->
+        <div v-if="show">Yes</div>
+        <div v-else>No</div>
+        <button @click="toggleShow">Toggle</button>
+        <!-- v-if v-else-if -->
+        <template v-if="number == 1">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </template>
+        <div v-else-if="number == 2">Hi</div>
+        <div v-else>No</div>
+        <button @click="increseNumber">Increase</button> {{ number }}
+        <BR>
+        <!-- v-show -->
+        <button @click="toggle"> show toggle</button>
+        <div v-show="v_show"> v-show  </div>
+        <!-- v-for -->
+        <div v-for="(person, index) in people" :key="person.id"> <!-- key uniq한 키를 필수로 넣어줄 것 -->
+            {{ person.name }}  {{ person.age }} {{ index }}
+        </div>
+        
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                show: false,
+                v_show: false,
+                number: 1,
+                people: [
+                    {id:1, name: 'a', age: 20},
+                    {id:2, name: 'b', age: 23},
+                    {id:3, name: 'c', age: 22},
+                    {id:4, name: 'd', age: 22},
+                    {id:5, name: 'e', age: 26}
+                ]
+            },
+            methods: {
+                toggleShow() {
+                    this.show = !this.show;
+                },
+                increseNumber() {
+                    this.number++;
+                },
+                toggle(){
+                    this.v_show = !this.v_show;
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
